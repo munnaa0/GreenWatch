@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GreenWatch</string>
+    <string name="which_department_you_are">Which Department You are ?</string>
+    <string name="eee">EEE</string>
+    <string name="me">ME</string>
+    <string name="cse">CSE</string>
+    <string name="photography_tips">Photography Tips</string>
+    
+    <!-- Camera Activity Strings -->
+    <string name="capture_photo">Capture Plant Photo</string>
+    <string name="got_it">Got it!</string>
+    <string name="last_photo">Last Photo</string>
+    <string name="back_button">Back</string>
+    <string name="open_gallery">Open Gallery</string>
+    <string name="photography_tips_title">📸 Plant Photography Tips</string>
+    <string name="photography_tips_content">• Hold phone steady and focus on the plant\n• Use natural lighting when possible\n• Fill the frame with your plant\n• Avoid shadows on the subject\n• Clean the camera lens before shooting\n• Tap anywhere on screen to focus\n• Green focus circle shows where camera is focused\n• Long-press camera view to toggle grid lines</string>
+    <string name="camera_preview">CAMERA PREVIEW</string>
+    <string name="camera_instructions">🌱 Position your plant in the frame and tap capture</string>
+    <string name="camera_status_ready">Camera Status: Ready</string>
+    <string name="focus_indicator">Focus Indicator</string>
+    <string name="focus_ring_symbol">⊙</string>
+</resources>

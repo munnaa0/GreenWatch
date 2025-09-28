@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".CameraActivity">
+
+    <!-- Camera Preview View - Full Screen -->
+    <!-- Use FrameLayout to contain PreviewView for better design-time handling -->
+    <FrameLayout
+        android:id="@+id/previewContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#333333"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <!-- Design-time preview placeholder -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#333333"
+            android:text="📷\n\nCamera Preview\n\n(Will show live camera feed when running)"
+            android:textColor="#CCCCCC"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-light"
+            tools:visibility="gone" />
+            
+        <!-- Actual PreviewView - will be added programmatically -->
+        <!-- This prevents design-time instantiation issues -->
+        
+    </FrameLayout>
+
+    <!-- Tips Text at Top -->
+    <TextView
+        android:id="@+id/tipsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tips_background"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Ensure good lighting and keep the plant centered in frame"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Shutter Button at Bottom Center -->
+    <ImageButton
+        android:id="@+id/shutterButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/shutter_button_background"
+        android:contentDescription="Capture Photo"
+        android:src="@drawable/ic_camera_shutter"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
