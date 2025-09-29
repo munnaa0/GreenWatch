@@ -92,15 +92,18 @@ public class GrowthDetailActivity extends AppCompatActivity {
             try {
                 Uri uri = Uri.parse(photoUri);
                 photoImageView.setImageURI(uri);
+                // Check if image actually loaded, if not show placeholder
+                if (photoImageView.getDrawable() == null) {
+                    photoImageView.setImageResource(R.drawable.default_plant_image);
+                }
                 photoImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                Log.d(TAG, "Photo loaded successfully: " + photoUri);
             } catch (Exception e) {
-                Log.e(TAG, "Error loading photo: " + e.getMessage(), e);
-                photoImageView.setImageResource(R.drawable.ic_launcher_foreground);
+                photoImageView.setImageResource(R.drawable.default_plant_image);
+                photoImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             }
         } else {
-            Log.w(TAG, "No photo URI provided");
-            photoImageView.setImageResource(R.drawable.ic_launcher_foreground);
+            photoImageView.setImageResource(R.drawable.default_plant_image);
+            photoImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
     }
 
@@ -143,8 +146,6 @@ public class GrowthDetailActivity extends AppCompatActivity {
             suggestionsText.setText("No specific care suggestions available.");
         }
     }
-
-
 
     @Override
     public void onBackPressed() {

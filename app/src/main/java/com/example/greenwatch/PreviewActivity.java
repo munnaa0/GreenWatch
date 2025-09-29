@@ -85,7 +85,6 @@ public class PreviewActivity extends AppCompatActivity {
     private void loadImageIntoView() {
         try {
             photoImageView.setImageURI(imageUri);
-            
             photoImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             photoImageView.setAdjustViewBounds(true);
         } catch (Exception e) {
