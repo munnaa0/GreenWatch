@@ -18,10 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Checkbox extends AppCompatActivity {
 
-
     private CheckBox cseCheck, eeeCheck, meCheck;
     private Button submitButton;
-
     private TextView resultTextView;
 
 
@@ -42,26 +40,6 @@ public class Checkbox extends AppCompatActivity {
         meCheck = (CheckBox)  findViewById(R.id.cME);
         submitButton = (Button) findViewById(R.id.button);
         resultTextView = (TextView) findViewById(R.id.resText);
-
-//        submitButton.setOnClickListener(v -> {
-//            StringBuilder result = new StringBuilder("Selected Departments:\n");
-//
-//            if (cseCheck.isChecked()) {
-//                result.append("Computer Science and Engineering\n");
-//            }
-//            if (eeeCheck.isChecked()) {
-//                result.append("Electrical and Electronics Engineering\n");
-//            }
-//            if (meCheck.isChecked()) {
-//                result.append("Mechanical Engineering\n");
-//            }
-//
-//            if (result.toString().equals("Selected Departments:\n")) {
-//                result.append("None");
-//            }
-//
-//            resultTextView.setText(result.toString());
-//        });
 
         submitButton.setOnClickListener(v -> {
             String result = "Selected Departments:\n";
@@ -88,10 +66,5 @@ public class Checkbox extends AppCompatActivity {
             startActivity(intent);
 
         });
-
     }
-
-
-
-
 }

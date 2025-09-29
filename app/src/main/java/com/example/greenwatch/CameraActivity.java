@@ -39,9 +39,6 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 
-//CameraActivity handles photo capture using CameraX API.
-//Provides live camera preview with capture functionality and saves images to external storage.
-
 public class CameraActivity extends AppCompatActivity {
     
     private static final String TAG = "CameraActivity";
@@ -61,7 +58,6 @@ public class CameraActivity extends AppCompatActivity {
         
         initializeViews();
         
-        // Check permissions and start camera
         if (allPermissionsGranted()) {
             startCamera();
         } else {
@@ -72,9 +68,6 @@ public class CameraActivity extends AppCompatActivity {
         
         setupShutterButton();
     }
-
-
-//     * Initialize UI components
 
     private void initializeViews() {
         previewContainer = findViewById(R.id.previewContainer);
@@ -89,42 +82,27 @@ public class CameraActivity extends AppCompatActivity {
         previewView.setLayoutParams(layoutParams);
         previewContainer.addView(previewView);
         
-        // Set helpful tips for users and disable shutter until camera is ready
         tipsTextView.setText("Initializing camera...");
         shutterButton.setEnabled(false);
     }
-
-
-//     * Setup shutter button click listener
 
     private void setupShutterButton() {
         shutterButton.setOnClickListener(v -> capturePhoto());
     }
 
-
-//     * Get required permissions based on Android version
-
     private String[] getRequiredPermissions() {
         List<String> permissions = new ArrayList<>();
         
-        // Camera permission is always required
         permissions.add(Manifest.permission.CAMERA);
         
-        // Storage permissions depend on Android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            // Android 13+ uses READ_MEDIA_IMAGES for reading images
             permissions.add(Manifest.permission.READ_MEDIA_IMAGES);
         } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-            // Android 9 and below need WRITE_EXTERNAL_STORAGE
             permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-        // Android 10-12 doesn't need storage permissions for MediaStore operations
         
         return permissions.toArray(new String[0]);
     }
-
-
-//     * Check if all required permissions are granted
 
     private boolean allPermissionsGranted() {
         String[] requiredPermissions = getRequiredPermissions();
@@ -137,15 +115,11 @@ public class CameraActivity extends AppCompatActivity {
         return true;
     }
 
-
-//     * Handle permission request results
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            // Log the results for debugging
             for (int i = 0; i < permissions.length; i++) {
                 Log.d(TAG, "Permission " + permissions[i] + " result: " + 
                     (grantResults[i] == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
@@ -155,7 +129,6 @@ public class CameraActivity extends AppCompatActivity {
                 Log.d(TAG, "All permissions granted, starting camera");
                 startCamera();
             } else {
-                // Show specific message about which permissions are missing
                 String[] requiredPermissions = getRequiredPermissions();
                 StringBuilder missingPermissions = new StringBuilder();
                 for (String permission : requiredPermissions) {
@@ -189,31 +162,23 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-
-      // Initialize and start the camera with CameraX
-
     private void startCamera() {
         Log.d(TAG, "Starting camera initialization...");
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         
         cameraProviderFuture.addListener(() -> {
             try {
-                // Camera provider is now guaranteed to be available
                 cameraProvider = cameraProviderFuture.get();
                 Log.d(TAG, "Camera provider obtained successfully");
                 
-                // Set up the view finder use case to display camera preview
-                Preview preview = new Preview.Builder()
-                        .build();
+                Preview preview = new Preview.Builder().build();
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
                 
-                // Set up the capture use case to allow users to take photos
                 imageCapture = new ImageCapture.Builder()
                         .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                         .setTargetRotation(getWindowManager().getDefaultDisplay().getRotation())
                         .build();
                 
-                // Select back camera as a default, fall back to front if not available
                 CameraSelector cameraSelector;
                 try {
                     if (cameraProvider.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA)) {
@@ -229,19 +194,14 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "Error checking camera availability", e);
-                    // Default to back camera if we can't check availability
                     cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
                 }
                 
                 try {
-                    // Unbind use cases before rebinding
                     cameraProvider.unbindAll();
-                    
-                    // Bind use cases to camera
                     cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
                     Log.d(TAG, "Camera initialized successfully");
                     
-                    // Update UI to indicate camera is ready
                     runOnUiThread(() -> {
                         tipsTextView.setText("Camera ready! Ensure good lighting and keep the plant centered in frame");
                         shutterButton.setEnabled(true);
@@ -259,17 +219,12 @@ public class CameraActivity extends AppCompatActivity {
         }, ContextCompat.getMainExecutor(this));
     }
 
-
-     // Capture photo and save to external storage
-
     private void capturePhoto() {
-        // Check if we still have permissions
         if (!allPermissionsGranted()) {
             showError("Permissions not granted. Please restart the app and grant all permissions.");
             return;
         }
         
-        // Get a stable reference of the modifiable image capture use case
         if (imageCapture == null) {
             showError("Camera not ready. Please try again.");
             return;
@@ -277,15 +232,12 @@ public class CameraActivity extends AppCompatActivity {
         
         Log.d(TAG, "Starting photo capture...");
         
-        // Create time stamped name for the image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String filename = "Plant_" + timeStamp + ".jpg";
         
-        // Create output file options
         ImageCapture.OutputFileOptions outputFileOptions;
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // Use MediaStore for Android 10+
             ContentValues contentValues = new ContentValues();
             contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, filename);
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
@@ -297,7 +249,6 @@ public class CameraActivity extends AppCompatActivity {
                     contentValues
             ).build();
         } else {
-            // Use direct file access for older Android versions
             File photoDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AI_Crop_Monitor");
             if (!photoDir.exists()) {
                 photoDir.mkdirs();
@@ -307,7 +258,6 @@ public class CameraActivity extends AppCompatActivity {
             outputFileOptions = new ImageCapture.OutputFileOptions.Builder(photoFile).build();
         }
         
-        // Set up image capture listener, which is triggered after photo has been taken
         imageCapture.takePicture(
                 outputFileOptions,
                 ContextCompat.getMainExecutor(this),
@@ -339,7 +289,6 @@ public class CameraActivity extends AppCompatActivity {
                         if (savedUri != null) {
                             Log.d(TAG, "Photo saved successfully: " + savedUri);
                             Toast.makeText(CameraActivity.this, "Photo captured successfully!", Toast.LENGTH_SHORT).show();
-                            // Launch PreviewActivity with the saved image URI
                             launchPreviewActivity(savedUri);
                         } else {
                             Log.e(TAG, "Photo saved but URI is null");

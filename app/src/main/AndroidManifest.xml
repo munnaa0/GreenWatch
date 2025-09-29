@@ -33,6 +33,16 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".GrowthHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GrowthDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GrowthHistoryActivity" />
+        <activity
             android:name=".Checkbox"
             android:exported="false" />
         <activity

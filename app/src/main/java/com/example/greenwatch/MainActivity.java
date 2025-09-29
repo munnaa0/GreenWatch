@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         
-        // Set up capture photo button
         findViewById(R.id.btnCapturePhoto).setOnClickListener(v -> 
             startActivity(new Intent(this, CameraActivity.class)));
+        
+        findViewById(R.id.btnGrowthHistory).setOnClickListener(v -> 
+            startActivity(new Intent(this, GrowthHistoryActivity.class)));
     }
 }
