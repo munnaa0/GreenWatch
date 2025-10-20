@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RegistrationActivity">
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Create Account"
+        android:textColor="#2E7D32"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageLogo" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Sign up to get started"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCreateAccount" />
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Full Name"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+
+    <EditText
+        android:id="@+id/etRegisterEmail"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFullName" />
+
+    <EditText
+        android:id="@+id/etRegisterPassword"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textColorHint="#9E9E9E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRegisterEmail" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#2196F3"
+        android:text="Register"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRegisterPassword" />
+
+    <TextView
+        android:id="@+id/tvLoginPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Already have an account?"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/tvLoginLink"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister" />
+
+    <TextView
+        android:id="@+id/tvLoginLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:text="Log in here"
+        android:textColor="#2196F3"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvLoginPrompt"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister" />
+
+    <TextView
+        android:id="@+id/tvTipsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="💡 Quick Tip"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#388E3C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginLink" />
+
+    <TextView
+        android:id="@+id/tvPlantTip"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#F1F8E9"
+        android:padding="12dp"
+        android:text="🌿 Take photos regularly to track your plant's growth and health progress over time."
+        android:textSize="13sp"
+        android:textColor="#2E7D32"
+        android:lineSpacingExtra="2dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTipsTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
