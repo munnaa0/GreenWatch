@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Set up button click listeners
         
         findViewById(R.id.btnCapturePhoto).setOnClickListener(v -> startActivity(new Intent(this, CameraActivity.class)));
         findViewById(R.id.btnSelectPhoto).setOnClickListener(v -> pickImageLauncher.launch("image/*"));
